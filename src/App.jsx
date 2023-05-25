@@ -1,51 +1,6 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//       <div>
-//         <a href="https://vitejs.dev" target="_blank">
-//           <img src={viteLogo} className="logo" alt="Vite logo" />
-//         </a>
-//         <a href="https://react.dev" target="_blank">
-//           <img src={reactLogo} className="logo react" alt="React logo" />
-//         </a>
-//       </div>
-//       <h1>Vite + React</h1>
-//       <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-//         <p>
-//           Edit <code>src/App.jsx</code> and save to test HMR
-//         </p>
-//       </div>
-//       <p className="read-the-docs">
-//         Click on the Vite and React logos to learn more
-//       </p>
-//     </>
-//   )
-// }
-
-// const App = () => {
-//   const [count, setCount] = useState(0)
-
-//   const handleClick = () => {
-//     setCount(count + 1);
-//   }
-
-//   return (
-//     <div>
-//       <h1>{count}</h1>
-//       <button onClick={() => {handleClick()}}>+</button>
-//     </div>
-//   );
-// }
+import Todos from './components/Todos'
 
 function App() {
   const [todos, setTodos] = useState([
@@ -66,16 +21,32 @@ function App() {
     },
   ])
 
-  console.log(todos)
+  const toggleCompleted = (todoId) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === todoId) {
+        todo.completed = !todo.completed
+      }
+      return todo
+    })
+    setTodos(updatedTodos)
+  }
 
   return (
-    <div>
-      <h1>My Todo List</h1>
-      {todos.map((todo) => {
-        return <p key={todo.id}>{todo.title}</p>
-      })}
+    <div style={styles.container}>
+      <h1 style={styles.title}>My Todo List</h1>
+      <Todos todos={todos} toggleCompleted={toggleCompleted} />
     </div>
   )
+}
+
+const styles = {
+  container: {
+    textAlign: 'center',
+    padding: '12px',
+  },
+  title: {
+    fontSize: '36px',
+  },
 }
 
 export default App
