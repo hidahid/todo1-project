@@ -1,10 +1,8 @@
-// Lakukan import "createContext" dari react
 import { useState, createContext } from "react";
 import "./App.css";
 import Todos from "./components/Todos";
 import TodoForm from "./components/TodoForm";
 
-// Buatlah sebuah context
 export const TodoContext = createContext();
 
 function App() {
